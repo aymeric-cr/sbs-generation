@@ -52,7 +52,7 @@ This alteration allows users to perform *False Alarm* and *Aircraft spoofing* at
   </action>
 </scenario>
 ```
-There is a file nammed (*src/main/resources/xsd/scenario.xsd*) which describes formally a well formed XML scenario file.
+The file *src/main/resources/xsd/scenario.xsd* describes what is a well formed XML scenario file.
  
  
 ## Usage
