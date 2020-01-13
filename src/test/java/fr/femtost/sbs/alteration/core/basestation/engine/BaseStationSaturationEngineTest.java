@@ -9,7 +9,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.io.Files.write;
 import static fr.femtost.sbs.alteration.core.basestation.BstHelper.*;
 import static fr.femtost.sbs.alteration.core.basestation.engine.GhostAircraftHelper.*;
-import static fr.femtost.sbs.alteration.core.incident.IncidentHelper.*;
+import static fr.femtost.sbs.alteration.core.scenario.ScenarioHelper.*;
 import static java.io.File.createTempFile;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.assertEquals;

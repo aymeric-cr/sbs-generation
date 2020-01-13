@@ -1,13 +1,13 @@
 package fr.femtost.sbs.alteration.core.basestation.engine;
 
-import fr.femtost.sbs.alteration.core.incident.UnknownScopeException;
+import fr.femtost.sbs.alteration.core.scenario.UnknownScopeException;
 import org.junit.Test;
 
 import java.time.Instant;
 
 import static fr.femtost.sbs.alteration.core.basestation.BstHelper.timestampedBstMessage;
 import static fr.femtost.sbs.alteration.core.basestation.engine.BaseStationActionEngine.isMessageInScope;
-import static fr.femtost.sbs.alteration.core.incident.IncidentHelper.timeWindow;
+import static fr.femtost.sbs.alteration.core.scenario.ScenarioHelper.timeWindow;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

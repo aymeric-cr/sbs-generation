@@ -1,7 +1,7 @@
 package fr.femtost.sbs.alteration.core.engine;
 
-import fr.femtost.sbs.alteration.core.incident.Recording;
-import fr.femtost.sbs.alteration.core.incident.UnknownActionException;
+import fr.femtost.sbs.alteration.core.scenario.Recording;
+import fr.femtost.sbs.alteration.core.scenario.UnknownActionException;
 import org.junit.Test;
 
 import java.io.File;
@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.time.Instant;
 
 import static com.google.common.io.Files.write;
-import static fr.femtost.sbs.alteration.core.incident.IncidentHelper.*;
+import static fr.femtost.sbs.alteration.core.scenario.ScenarioHelper.*;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

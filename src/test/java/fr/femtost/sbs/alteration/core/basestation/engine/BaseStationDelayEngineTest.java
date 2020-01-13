@@ -6,8 +6,8 @@ import org.junit.Test;
 import java.io.File;
 
 import static fr.femtost.sbs.alteration.core.basestation.BstHelper.*;
-import static fr.femtost.sbs.alteration.core.incident.IncidentHelper.*;
-import static fr.femtost.sbs.alteration.core.incident.Parameter.CHARAC_TIMESTAMP;
+import static fr.femtost.sbs.alteration.core.scenario.ScenarioHelper.*;
+import static fr.femtost.sbs.alteration.core.scenario.Parameter.CHARAC_TIMESTAMP;
 import static org.junit.Assert.assertEquals;
 import static org.powermock.reflect.Whitebox.invokeMethod;
 

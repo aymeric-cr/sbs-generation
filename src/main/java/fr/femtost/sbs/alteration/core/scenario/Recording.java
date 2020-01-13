@@ -1,4 +1,4 @@
-package fr.femtost.sbs.alteration.core.incident;
+package fr.femtost.sbs.alteration.core.scenario;
 
 import java.io.File;
 

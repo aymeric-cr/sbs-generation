@@ -1,28 +1,27 @@
-package fr.femtost.sbs.alteration.core.incident;
-
-import testools.predicate.CollectionPredicate;
+package fr.femtost.sbs.alteration.core.scenario;
 
 import java.io.File;
 import java.util.function.Predicate;
 
-import static fr.femtost.sbs.alteration.core.incident.Action.*;
-import static fr.femtost.sbs.alteration.core.incident.Parameter.CHARAC_ICAO;
+import static fr.femtost.sbs.alteration.core.scenario.Action.*;
+import static fr.femtost.sbs.alteration.core.scenario.Parameter.CHARAC_ICAO;
 import static java.util.Arrays.asList;
+import static testools.predicate.CollectionPredicate.containsOnly;
 import static testools.predicate.PredicateUtils.and;
 
-public class IncidentHelper {
+public class ScenarioHelper {
 
     public static Parameter parameter(final String characteristic,
                                       final String value) {
-        return parameter(characteristic, value, false, 0);
+        return parameter(characteristic, value, "simple", 0);
     }
 
     public static Parameter parameter(final String characteristic,
                                       final String value,
-                                      final boolean offset) {
+                                      final String mode) {
         final Parameter parameter = new Parameter();
         parameter.setCharacteristic(characteristic);
-        parameter.setOffset(offset);
+        parameter.setMode(mode);
         parameter.setNumber(0);
         parameter.setValue(value);
         return parameter;
@@ -30,19 +29,23 @@ public class IncidentHelper {
 
     public static Parameter saturationParameter(final String icao,
                                                 final int number) {
-        return parameter(CHARAC_ICAO, icao, false, number);
+        return parameter(CHARAC_ICAO, icao, "simple", number);
     }
 
     public static Parameter parameter(final String characteristic,
                                       final String value,
-                                      final boolean offset,
+                                      final String mode,
                                       final int number) {
         final Parameter parameter = new Parameter();
         parameter.setCharacteristic(characteristic);
-        parameter.setOffset(offset);
+        parameter.setMode(mode);
         parameter.setNumber(number);
         parameter.setValue(value);
         return parameter;
+    }
+
+    public static Target beastTarget(final String targets) {
+        return target("icao", targets);
     }
 
     public static Target bstTarget(final String targets) {
@@ -182,63 +185,31 @@ public class IncidentHelper {
         return scope;
     }
 
-    public static Predicate<Incident> anIncident(final Predicate<Incident> predicate) {
-        return incident -> {
-            if (incident.getSensors() != null) {
-                return predicate.test(incident);
+    public static Predicate<Scenario> aScenario(final String record,
+                                                final String filter,
+                                                final Predicate<Scenario> predicate) {
+        return scenario -> {
+            if (scenario.getRecord().compareTo(record) != 0) {
+                System.err.println("Record path - Expected: " + record + ". Got: " + scenario.getRecord());
+                return false;
             }
-            System.err.println("No <Sensors> element");
-            return false;
+            if (scenario.getFilter().compareTo(filter) != 0) {
+                System.err.println("Filter - Expected: " + filter + ". Got: " + scenario.getFilter());
+                return false;
+            }
+            return predicate.test(scenario);
         };
     }
 
     @SafeVarargs
-    public static Predicate<Incident> withSensors(final Predicate<Sensor>... sensors) {
-        return incident -> {
-            if (sensors.length != incident.getSensors().size()) {
-                System.err.println("Number of sensors - Expected: " + sensors.length +
-                        ". Got: " + incident.getSensors().size());
-                return false;
-            }
-            return CollectionPredicate.containsOnly(sensors).test(incident.getSensors());
-        };
-    }
-
-    public static Predicate<Sensor> aSensor(final String sensorType,
-                                            final String sID,
-                                            final String record,
-                                            final String filter,
-                                            final Predicate<Sensor> predicate) {
-        return sensor -> {
-            if (sensor.getSensorType().compareTo(sensorType) != 0) {
-                System.err.println("Sensor type - Expected: " + sensorType + ". Got: " + sensor.getSensorType());
-                return false;
-            }
-            if (sensor.getsID().compareTo(sID) != 0) {
-                System.err.println("Sensor ID - Expected: " + sID + ". Got: " + sensor.getsID());
-                return false;
-            }
-            if (sensor.getRecord().compareTo(record) != 0) {
-                System.err.println("Record path - Expected: " + record + ". Got: " + sensor.getRecord());
-                return false;
-            }
-            if (sensor.getFilter().compareTo(filter) != 0) {
-                System.err.println("Filter - Expected: " + filter + ". Got: " + sensor.getFilter());
-                return false;
-            }
-            return predicate.test(sensor);
-        };
-    }
-
-    @SafeVarargs
-    public static Predicate<Sensor> withActions(final Predicate<Action>... actions) {
-        return sensor -> {
-            if (actions.length != sensor.getActions().size()) {
+    public static Predicate<Scenario> withActions(final Predicate<Action>... actions) {
+        return scenario -> {
+            if (actions.length != scenario.getActions().size()) {
                 System.err.println("Number of actions - Expected: " + actions.length +
-                        ". Got: " + sensor.getActions().size());
+                        ". Got: " + scenario.getActions().size());
                 return false;
             }
-            return CollectionPredicate.containsOnly(actions).test(sensor.getActions());
+            return containsOnly(actions).test(scenario.getActions());
         };
     }
 
@@ -379,7 +350,7 @@ public class IncidentHelper {
                         ". Got: " + polygon.getVertices().size());
                 return false;
             }
-            return CollectionPredicate.containsOnly(vertex).test(polygon.getVertices());
+            return containsOnly(vertex).test(polygon.getVertices());
         };
     }
 
@@ -402,7 +373,7 @@ public class IncidentHelper {
     public static Predicate<Parameters> withParameters(final Predicate<Target> target,
                                                        final Predicate<Parameter>... parameters) {
         return parameters1 ->
-                target.test(parameters1.getTarget()) && CollectionPredicate.containsOnly(parameters).test(parameters1.getParameterList());
+                target.test(parameters1.getTarget()) && containsOnly(parameters).test(parameters1.getParameterList());
     }
 
     public static Predicate<Parameters> withTrajectoryParameters(final Predicate<Target> target,
@@ -426,12 +397,12 @@ public class IncidentHelper {
                 });
     }
 
-    public static Predicate<Parameter> aParameter(final boolean offset,
+    public static Predicate<Parameter> aParameter(final String mode,
                                                   final String key,
                                                   final String value) {
         return parameter -> {
-            if (parameter.isOffset() != offset) {
-                System.err.println("Parameter offset - Expected: " + offset + ". Got: " + parameter.isOffset());
+            if (parameter.getMode().compareToIgnoreCase(mode) != 0) {
+                System.err.println("Parameter mode - Expected: " + mode + ". Got: " + parameter.getMode());
                 return false;
             }
             if (parameter.getCharacteristic().compareTo(key) != 0) {
@@ -446,12 +417,12 @@ public class IncidentHelper {
         };
     }
 
-    public static Predicate<Parameter> aParameter(final boolean offset,
+    public static Predicate<Parameter> aParameter(final String mode,
                                                   final String key,
                                                   final String value,
                                                   final int number) {
         return and(
-                aParameter(offset, key, value),
+                aParameter(mode, key, value),
                 parameter -> {
                     if (parameter.getNumber() != number) {
                         System.err.println("Parameter 'number' - Expected: " + number + ". Got: " + parameter.getNumber());
@@ -463,7 +434,7 @@ public class IncidentHelper {
 
     @SafeVarargs
     public static Predicate<Trajectory> aTrajectory(final Predicate<WayPoint>... wayPoints) {
-        return trajectory -> CollectionPredicate.containsOnly(wayPoints).test(trajectory.getWayPoints());
+        return trajectory -> containsOnly(wayPoints).test(trajectory.getWayPoints());
     }
 
     public static Predicate<WayPoint> withWayPoint(final double latitude,

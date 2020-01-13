@@ -1,4 +1,4 @@
-package fr.femtost.sbs.alteration.core.incident;
+package fr.femtost.sbs.alteration.core.scenario;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
@@ -6,7 +6,7 @@ public class Action {
 
     public static final String ACTION_TYPE_ALTERATION = "ALTERATION";
     public static final String ACTION_TYPE_CREATION = "CREATION";
-    public static final String ACTION_TYPE_DELAY = "ALTERATIONTIMESTAMP";
+    public static final String ACTION_TYPE_DELAY = "DELAY";
     public static final String ACTION_TYPE_DELETION = "DELETION";
     public static final String ACTION_TYPE_SATURATION = "SATURATION";
     public static final String ACTION_TYPE_REPLAY = "REPLAY";

@@ -7,8 +7,8 @@ import java.io.File;
 import java.util.Optional;
 
 import static fr.femtost.sbs.alteration.core.basestation.BstHelper.*;
-import static fr.femtost.sbs.alteration.core.incident.IncidentHelper.*;
-import static fr.femtost.sbs.alteration.core.incident.Parameter.*;
+import static fr.femtost.sbs.alteration.core.scenario.ScenarioHelper.*;
+import static fr.femtost.sbs.alteration.core.scenario.Parameter.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.powermock.reflect.Whitebox.invokeMethod;
@@ -114,7 +114,7 @@ public class BaseStationAlterationEngineTest {
                 alteration(
                         timeWindow(10000, 20000),
                         parameters(bstTarget("4B1613"),
-                                parameter(CHARAC_ICAO, "39AC45"))));
+                                parameter(CHARAC_HEX_IDENT, "39AC45"))));
         final BaseStationMessageFull message = bstMessageFull(
                 "4B1613",
                 startDate + 10000,
@@ -359,7 +359,7 @@ public class BaseStationAlterationEngineTest {
                 alteration(
                         timeWindow(30, 40),
                         parameters(bstTarget("4B1613"),
-                                parameter(CHARAC_GROUNDSPEED, "50.4", true))));
+                                parameter(CHARAC_GROUNDSPEED, "50.4", MODE_OFFSET))));
         final BaseStationMessageFull message = bstMessageFull(
                 "4B1613",
                 startDate + 35,

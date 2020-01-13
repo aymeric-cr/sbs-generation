@@ -22,7 +22,8 @@ To use the library, use the following command:
 ```shell
 $ java -jar sbs-generation-0.1-SNAPSHOT-jar-with-dependencies.jar alt-directive.xml
 ```
-The exact content of the XML file as well as the various alterations are described below.
+The exact content of the XML file is described in the file *src/main/resources/xsd/scenario.xsd* 
+The various alterations and their corresponding XML file are described below.
 
 ## Features
 
@@ -58,10 +59,13 @@ For instance:
     </scope>
     <parameters>
       <target identifier="hexIdent">37AC45</target>
-      <parameter type="DRIFT">
+      <parameter type="SIMPLE">
         <key>hexIdent</key>
         <value>RANDOM</value>
-        <number>15</number>
+      </parameter>
+    <parameter type="SIMPLE">
+        <key>squawk</key>
+        <value>7700</value>
       </parameter>
     </parameters>
   </action>
