@@ -52,7 +52,7 @@ It can be of four modes:
 For instance:
 ```XML
 <scenario>
-  <record>..\relativepath\to\recording.sbs</record>
+  <record>../relativepath/to/recording.sbs</record>
   <firstDate>1481274814831</firstDate>
   <action alterationType="ALTERATION">
     <scope type="timeWindow">
@@ -82,7 +82,7 @@ Additional information required in the XML file is $n$, is the number of deleted
 For instance:
 ```XML
 <scenario>
-  <record>..\relativepath\to\recording.sbs</record>
+  <record>../relativepath/to/recording.sbs</record>
   <firstDate>1481274814831</firstDate>
   <action alterationType="DELETION">
     <scope type="timeWindow">
@@ -91,11 +91,6 @@ For instance:
     </scope>
     <parameters>
       <target identifier="hexIdent">37AC45</target>
-      <parameter type="drift">
-        <key>hexIdent</key>
-        <value>RANDOM</value>
-        <number>15</number>
-      </parameter>
     </parameters>
   </action>
 </scenario>
@@ -110,9 +105,9 @@ For instance:
 
 ```XML
 <scenario>
-  <record>..\relativepath\to\recording.sbs</record>
+  <record>../relativepath/to/recording.sbs</record>
   <firstDate>1481274814831</firstDate>
-  <action alterationType="CREATION">
+  <action alterationType="TRAJECTORY">
     <scope type="timeWindow">
       <lowerBound>282285</lowerBound>
       <upperBound>732405</upperBound>
@@ -144,7 +139,7 @@ For instance:
 
 ```XML
 <scenario>
-  <record>..\relativepath\to\recording.sbs</record>
+  <record>../relativepath/to/recording.sbs</record>
   <firstDate>1481274814831</firstDate>
   <action alterationType="TRAJECTORY">
     <scope type="timeWindow">
@@ -170,7 +165,7 @@ For instance:
         <key>hexIdent</key>
         <value>RANDOM</value>
       </parameter>
-      <parameter>
+      <parameter type="simple">
         <key>callsign</key>
         <value>AL89LRE</value>
       </parameter>
@@ -190,7 +185,7 @@ The XML file should contain the number of fake trajectories to create. For insta
 
 ```XML
 <scenario>
-  <record>..\relativepath\to\recording.sbs</record>
+  <record>../relativepath/to/recording.sbs</record>
   <firstDate>1481274814831</firstDate>
   <action alterationType="SATURATION">
     <scope type="timeWindow">
@@ -215,7 +210,7 @@ It takes two recordings, one from which extract a flight track, and another into
 
 ```XML
 <scenario>
-  <record>..\relativepath\to\recording.sbs</record>
+  <record>../relativepath/to/recording.sbs</record>
   <firstDate>1481274814831</firstDate>
   <action alterationType="REPLAY">
     <scope type="timeWindow">
@@ -224,7 +219,7 @@ It takes two recordings, one from which extract a flight track, and another into
     </scope>
     <parameters>
       <target identifier="hexIdent">37AC45</target>
-      <recordPath>path/to/sourceRecording.sbs</recordPath>
+      <recordPath>../relativepath/to/sourceRecording.sbs</recordPath>
       <parameter type="simple">
         <key>hexIdent</key>
         <value>RANDOM</value>
