@@ -1,6 +1,8 @@
 # SBS FDIA Generator
 > Test Data Generation for False Data Injection Attack Testing in Air Traffic Surveillance
 
+This library lets you perform alterations on legitimate ADS-B recordings in the SBS format. 
+
 ## Installation
 
 - You need Java 1.8+ and maven 3 in order to build and run this code. To build the library enter the following maven command:
