@@ -146,7 +146,7 @@ For instance:
 ### Ghost Aircraft Creation
 
 In this attack, the attacker creates a fake track from scratch, implying that in this case, fake messages must be created and inserted into the target recording.
-The XML file supplied as input must contain a set of way points as well as a list of property values (static properties such as ICAO address, callsign, etc.)
+The XML file supplied as input must contain a set of way points as well as a list of property values (static properties such as ICAO address, callsign, etc.). 
 
 For instance:
 
@@ -194,7 +194,9 @@ However, this has proven to be quite straightforward for detection systems to re
 The definition of the attack is instead slightly modified to become **virtual trajectory modification flooding**. 
 The goal is to suddenly generate many different trajectories for a targeted aircraft, as if the aircraft was being split in multiple pieces, thus saturating the detection systems with many conflicting messages.
 
-The XML file should contain the number of fake trajectories to create. For instance:
+The XML file should contain the number of fake trajectories to create. 
+
+For instance:
 
 ```XML
 <scenario>
@@ -219,7 +221,9 @@ The XML file should contain the number of fake trajectories to create. For insta
 
 ### Replay
 
-It takes two recordings, one from which extract a flight track, and another into which insert the flight track. For instance:
+It takes two recordings, one from which extract a flight track, and another into which insert the flight track. 
+
+For instance:
 
 ```XML
 <scenario>
