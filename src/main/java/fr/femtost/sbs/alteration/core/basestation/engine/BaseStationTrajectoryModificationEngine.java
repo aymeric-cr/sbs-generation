@@ -3,7 +3,7 @@ package fr.femtost.sbs.alteration.core.basestation.engine;
 import fr.femtost.sbs.alteration.core.basestation.message.BaseStationMessage;
 import fr.femtost.sbs.alteration.core.basestation.message.parameter.*;
 import fr.femtost.sbs.alteration.core.engine.Message;
-import fr.femtost.sbs.alteration.core.incident.*;
+import fr.femtost.sbs.alteration.core.scenario.*;
 
 import java.io.BufferedReader;
 import java.io.File;

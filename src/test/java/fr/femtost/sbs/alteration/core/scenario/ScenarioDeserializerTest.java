@@ -1,4 +1,4 @@
-package fr.femtost.sbs.alteration.core.incident;
+package fr.femtost.sbs.alteration.core.scenario;
 
 import org.junit.Test;
 
@@ -6,17 +6,17 @@ import java.io.File;
 import java.io.IOException;
 
 import static com.google.common.io.Files.write;
-import static fr.femtost.sbs.alteration.core.incident.IncidentHelper.*;
-import static fr.femtost.sbs.alteration.core.incident.Parameter.MODE_OFFSET;
-import static fr.femtost.sbs.alteration.core.incident.Parameter.MODE_SIMPLE;
+import static fr.femtost.sbs.alteration.core.scenario.ScenarioHelper.*;
+import static fr.femtost.sbs.alteration.core.scenario.Parameter.MODE_OFFSET;
+import static fr.femtost.sbs.alteration.core.scenario.Parameter.MODE_SIMPLE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static testools.PredicateAssert.assertThat;
 
-public class IncidentDeserializerTest {
+public class ScenarioDeserializerTest {
 
     @Test
     public void deserialize_test_1() throws IOException {
-        final File incidentFile = File.createTempFile("incident", ".xml");
+        final File scenarioFile = File.createTempFile("scenario", ".xml");
         write("<scenario>\n" +
                 "            <record>../recordings/.VwHQorPfkuiBCN6l_ywV_g__/sbs_1305686021.json</record>\n" +
                 "            <filter />\n" +
@@ -46,9 +46,9 @@ public class IncidentDeserializerTest {
                 "                    </parameter>\n" +
                 "                </parameters>\n" +
                 "            </action>\n" +
-                "        </scenario>", incidentFile, UTF_8);
+                "        </scenario>", scenarioFile, UTF_8);
 
-        final IncidentDeserializer deserializer = new IncidentDeserializer(incidentFile);
+        final ScenarioDeserializer deserializer = new ScenarioDeserializer(scenarioFile);
         assertThat(deserializer.deserialize(),
                 aScenario("../recordings/.VwHQorPfkuiBCN6l_ywV_g__/sbs_1305686021.json", "",
                         withActions(
@@ -67,7 +67,7 @@ public class IncidentDeserializerTest {
 
     @Test
     public void deserialize_test_2() throws IOException {
-        final File incidentFile = File.createTempFile("incident", ".xml");
+        final File scenarioFile = File.createTempFile("scenario", ".xml");
         write("    <scenario>\n" +
                 "      <record>../recordings/.rxxyTBxKvc53k_Sf3rJ94w__/sbs_758628764.json</record>\n" +
                 "      <filter />\n" +
@@ -123,9 +123,9 @@ public class IncidentDeserializerTest {
                 "          </parameter>\n" +
                 "        </parameters>\n" +
                 "      </action>\n" +
-                "    </scenario>\n", incidentFile, UTF_8);
+                "    </scenario>\n", scenarioFile, UTF_8);
 
-        final IncidentDeserializer deserializer = new IncidentDeserializer(incidentFile);
+        final ScenarioDeserializer deserializer = new ScenarioDeserializer(scenarioFile);
         assertThat(deserializer.deserialize(),
                 aScenario("../recordings/.rxxyTBxKvc53k_Sf3rJ94w__/sbs_758628764.json", "",
                         withActions(
@@ -154,7 +154,7 @@ public class IncidentDeserializerTest {
 
     @Test
     public void deserialize_test_3() throws IOException {
-        final File incidentFile = File.createTempFile("incident", ".xml");
+        final File scenarioFile = File.createTempFile("scenario", ".xml");
         write("<scenario>\n" +
                 "      <record>../recordings/.rxxyTBxKvc53k_Sf3rJ94w__/sbs_758628764.json</record>\n" +
                 "      <filter />\n" +
@@ -180,9 +180,9 @@ public class IncidentDeserializerTest {
                 "          </parameter>\n" +
                 "        </parameters>\n" +
                 "      </action>\n" +
-                "    </scenario>\n", incidentFile, UTF_8);
+                "    </scenario>\n", scenarioFile, UTF_8);
 
-        final IncidentDeserializer deserializer = new IncidentDeserializer(incidentFile);
+        final ScenarioDeserializer deserializer = new ScenarioDeserializer(scenarioFile);
         assertThat(deserializer.deserialize(),
                 aScenario("../recordings/.rxxyTBxKvc53k_Sf3rJ94w__/sbs_758628764.json", "",
                         withActions(
@@ -200,7 +200,7 @@ public class IncidentDeserializerTest {
 
     @Test
     public void deserialize_test_4() throws IOException {
-        final File incidentFile = File.createTempFile("incident", ".xml");
+        final File scenarioFile = File.createTempFile("scenario", ".xml");
         write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "  <scenario>\n" +
                 "      <record>../recordings/.aPSf6iTuPZXsc1UrjhRkgQ__/sbs_2009861432.json</record>\n" +
@@ -267,9 +267,9 @@ public class IncidentDeserializerTest {
                 "          </parameter>\n" +
                 "        </parameters>\n" +
                 "      </action>\n" +
-                "    </scenario>\n", incidentFile, UTF_8);
+                "    </scenario>\n", scenarioFile, UTF_8);
 
-        final IncidentDeserializer deserializer = new IncidentDeserializer(incidentFile);
+        final ScenarioDeserializer deserializer = new ScenarioDeserializer(scenarioFile);
         assertThat(deserializer.deserialize(),
                 aScenario("../recordings/.aPSf6iTuPZXsc1UrjhRkgQ__/sbs_2009861432.json", "",
                         withActions(
@@ -297,7 +297,7 @@ public class IncidentDeserializerTest {
 
     @Test
     public void deserialize_trajectory_modification() throws IOException {
-        final File incidentFile = File.createTempFile("incident", ".xml");
+        final File scenarioFile = File.createTempFile("scenario", ".xml");
         write("<scenario>\n" +
                 "      <record>.dJXRXAw4EmGUCCdLZd_Xrw__/sbs_1.json</record>\n" +
                 "      <filter />\n" +
@@ -360,9 +360,9 @@ public class IncidentDeserializerTest {
                 "          </trajectory>\n" +
                 "        </parameters>\n" +
                 "      </action>\n" +
-                "    </scenario>", incidentFile, UTF_8);
+                "    </scenario>", scenarioFile, UTF_8);
 
-        final IncidentDeserializer deserializer = new IncidentDeserializer(incidentFile);
+        final ScenarioDeserializer deserializer = new ScenarioDeserializer(scenarioFile);
         assertThat(deserializer.deserialize(),
                 aScenario(".dJXRXAw4EmGUCCdLZd_Xrw__/sbs_1.json", "",
                         withActions(

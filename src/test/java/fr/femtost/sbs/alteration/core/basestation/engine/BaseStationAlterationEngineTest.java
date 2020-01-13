@@ -7,8 +7,8 @@ import java.io.File;
 import java.util.Optional;
 
 import static fr.femtost.sbs.alteration.core.basestation.BstHelper.*;
-import static fr.femtost.sbs.alteration.core.incident.IncidentHelper.*;
-import static fr.femtost.sbs.alteration.core.incident.Parameter.*;
+import static fr.femtost.sbs.alteration.core.scenario.ScenarioHelper.*;
+import static fr.femtost.sbs.alteration.core.scenario.Parameter.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.powermock.reflect.Whitebox.invokeMethod;

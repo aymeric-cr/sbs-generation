@@ -6,7 +6,7 @@ import org.powermock.reflect.Whitebox;
 import java.io.File;
 
 import static com.google.common.io.Files.write;
-import static fr.femtost.sbs.alteration.core.incident.IncidentHelper.*;
+import static fr.femtost.sbs.alteration.core.scenario.ScenarioHelper.*;
 import static java.io.File.createTempFile;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.assertEquals;

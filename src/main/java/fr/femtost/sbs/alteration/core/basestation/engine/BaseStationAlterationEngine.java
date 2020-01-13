@@ -3,10 +3,10 @@ package fr.femtost.sbs.alteration.core.basestation.engine;
 import fr.femtost.sbs.alteration.core.basestation.message.BaseStationMessage;
 import fr.femtost.sbs.alteration.core.basestation.message.parameter.*;
 import fr.femtost.sbs.alteration.core.engine.Message;
-import fr.femtost.sbs.alteration.core.incident.Action;
-import fr.femtost.sbs.alteration.core.incident.Parameter;
-import fr.femtost.sbs.alteration.core.incident.Recording;
-import fr.femtost.sbs.alteration.core.incident.UnknownScopeException;
+import fr.femtost.sbs.alteration.core.scenario.Action;
+import fr.femtost.sbs.alteration.core.scenario.Parameter;
+import fr.femtost.sbs.alteration.core.scenario.Recording;
+import fr.femtost.sbs.alteration.core.scenario.UnknownScopeException;
 
 import java.util.HashMap;
 

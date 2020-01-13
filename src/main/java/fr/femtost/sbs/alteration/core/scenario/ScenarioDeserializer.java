@@ -1,4 +1,4 @@
-package fr.femtost.sbs.alteration.core.incident;
+package fr.femtost.sbs.alteration.core.scenario;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import fr.femtost.sbs.alteration.core.utils.StreamUtils;
@@ -7,17 +7,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class IncidentDeserializer {
+public class ScenarioDeserializer {
 
-    private final File incidentFile;
+    private final File scenarioFile;
 
-    public IncidentDeserializer(final File incidentFile) {
-        this.incidentFile = incidentFile;
+    public ScenarioDeserializer(final File scenarioFile) {
+        this.scenarioFile = scenarioFile;
     }
 
     public Scenario deserialize() throws IOException {
         final XmlMapper mapper = new XmlMapper();
-        final String content = StreamUtils.inputStreamToString(new FileInputStream(incidentFile));
+        final String content = StreamUtils.inputStreamToString(new FileInputStream(scenarioFile));
         return mapper.readValue(content, Scenario.class);
     }
 }

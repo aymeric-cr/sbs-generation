@@ -1,10 +1,10 @@
 package fr.femtost.sbs.alteration.api;
 
 import fr.femtost.sbs.alteration.core.engine.ActionEngine;
-import fr.femtost.sbs.alteration.core.incident.Action;
-import fr.femtost.sbs.alteration.core.incident.IncidentDeserializer;
-import fr.femtost.sbs.alteration.core.incident.Recording;
-import fr.femtost.sbs.alteration.core.incident.Scenario;
+import fr.femtost.sbs.alteration.core.scenario.Action;
+import fr.femtost.sbs.alteration.core.scenario.ScenarioDeserializer;
+import fr.femtost.sbs.alteration.core.scenario.Recording;
+import fr.femtost.sbs.alteration.core.scenario.Scenario;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,10 +22,10 @@ public class AlterationAPI {
 
     }
 
-    public static void startAlteration(final File incidentFile) throws Exception {
+    public static void startAlteration(final File scenarioFile) throws Exception {
         final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-        final Scenario scenario = new IncidentDeserializer(incidentFile).deserialize();
-        final File recordingFile = new File(incidentFile.getParent() +
+        final Scenario scenario = new ScenarioDeserializer(scenarioFile).deserialize();
+        final File recordingFile = new File(scenarioFile.getParent() +
                 separatorsToSystem("/") +
                 scenario.getRecord());
         if (!recordingFile.exists() || !recordingFile.isFile()) {

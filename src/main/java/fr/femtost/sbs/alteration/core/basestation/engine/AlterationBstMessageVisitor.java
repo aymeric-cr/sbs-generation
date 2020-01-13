@@ -2,10 +2,10 @@ package fr.femtost.sbs.alteration.core.basestation.engine;
 
 import fr.femtost.sbs.alteration.core.basestation.message.parameter.*;
 import fr.femtost.sbs.alteration.core.engine.Message;
-import fr.femtost.sbs.alteration.core.incident.Parameter;
+import fr.femtost.sbs.alteration.core.scenario.Parameter;
 
 import static fr.femtost.sbs.alteration.core.basestation.engine.BaseStationAlterationEngine.*;
-import static fr.femtost.sbs.alteration.core.incident.Parameter.*;
+import static fr.femtost.sbs.alteration.core.scenario.Parameter.*;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;

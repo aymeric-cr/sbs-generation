@@ -1,14 +1,14 @@
 package fr.femtost.sbs.alteration.core.engine;
 
 import fr.femtost.sbs.alteration.core.basestation.engine.BaseStationActionEngine;
-import fr.femtost.sbs.alteration.core.incident.*;
+import fr.femtost.sbs.alteration.core.scenario.*;
 
 import java.io.*;
 import java.util.Optional;
 import java.util.UUID;
 
 import static com.google.common.io.Files.getFileExtension;
-import static fr.femtost.sbs.alteration.core.incident.Target.TARGET_ALL;
+import static fr.femtost.sbs.alteration.core.scenario.Target.TARGET_ALL;
 import static java.io.File.createTempFile;
 import static java.util.Arrays.asList;
 import static java.util.Optional.empty;

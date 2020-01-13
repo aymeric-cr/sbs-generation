@@ -12,10 +12,10 @@ class Main {
         }
     }
 
-    private static void alterRecording(final String incidentFilePath) throws Exception {
-        final File incidentFile = new File(incidentFilePath);
-        if (incidentFile.exists() && incidentFile.isFile()) {
-            AlterationAPI.startAlteration(new File(incidentFilePath));
+    private static void alterRecording(final String scenarioFilePath) throws Exception {
+        final File scenarioFile = new File(scenarioFilePath);
+        if (scenarioFile.exists() && scenarioFile.isFile()) {
+            AlterationAPI.startAlteration(new File(scenarioFilePath));
         }
     }
 }

@@ -2,8 +2,8 @@ package fr.femtost.sbs.alteration.core.engine;
 
 import fr.femtost.sbs.alteration.core.basestation.engine.AlterationBstMessageVisitor;
 import fr.femtost.sbs.alteration.core.basestation.message.BaseStationMessage;
-import fr.femtost.sbs.alteration.core.incident.Action;
-import fr.femtost.sbs.alteration.core.incident.Parameter;
+import fr.femtost.sbs.alteration.core.scenario.Action;
+import fr.femtost.sbs.alteration.core.scenario.Parameter;
 import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.geom.LatLon;
 

@@ -1,15 +1,15 @@
-package fr.femtost.sbs.alteration.core.incident;
+package fr.femtost.sbs.alteration.core.scenario;
 
 import java.io.File;
 import java.util.function.Predicate;
 
-import static fr.femtost.sbs.alteration.core.incident.Action.*;
-import static fr.femtost.sbs.alteration.core.incident.Parameter.CHARAC_ICAO;
+import static fr.femtost.sbs.alteration.core.scenario.Action.*;
+import static fr.femtost.sbs.alteration.core.scenario.Parameter.CHARAC_ICAO;
 import static java.util.Arrays.asList;
 import static testools.predicate.CollectionPredicate.containsOnly;
 import static testools.predicate.PredicateUtils.and;
 
-public class IncidentHelper {
+public class ScenarioHelper {
 
     public static Parameter parameter(final String characteristic,
                                       final String value) {
@@ -183,20 +183,6 @@ public class IncidentHelper {
         scope.setTime(time);
         scope.setPolygon(polygon);
         return scope;
-    }
-
-    public static Predicate<Incident> anIncident(final Predicate<Incident> predicate) {
-        return incident -> {
-            if (incident.getScenario() != null) {
-                return predicate.test(incident);
-            }
-            System.err.println("No <Sensors> element");
-            return false;
-        };
-    }
-
-    public static Predicate<Incident> withScenario(final Predicate<Scenario> scenario) {
-        return incident -> scenario.test(incident.getScenario());
     }
 
     public static Predicate<Scenario> aScenario(final String record,

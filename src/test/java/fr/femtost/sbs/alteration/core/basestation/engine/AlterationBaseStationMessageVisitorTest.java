@@ -4,8 +4,8 @@ import fr.femtost.sbs.alteration.core.basestation.message.BaseStationMessageFull
 import org.junit.Test;
 
 import static fr.femtost.sbs.alteration.core.basestation.BstHelper.*;
-import static fr.femtost.sbs.alteration.core.incident.IncidentHelper.parameter;
-import static fr.femtost.sbs.alteration.core.incident.Parameter.*;
+import static fr.femtost.sbs.alteration.core.scenario.ScenarioHelper.parameter;
+import static fr.femtost.sbs.alteration.core.scenario.Parameter.*;
 import static testools.PredicateAssert.assertThat;
 
 public class AlterationBaseStationMessageVisitorTest {
