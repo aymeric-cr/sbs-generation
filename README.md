@@ -40,15 +40,20 @@ This alteration allows users to perform *False Alarm* and *Aircraft spoofing* at
     </scope>
     <parameters>
       <target identifier="hexIdent">37AC45</target>
-      <parameter type="DRIFT">
+      <parameter type="SIMPLE">
         <key>hexIdent</key>
         <value>RANDOM</value>
-        <number>15</number>
+      </parameter>
+    <parameter type="SIMPLE">
+        <key>squawk</key>
+        <value>7700</value>
       </parameter>
     </parameters>
   </action>
 </scenario>
 ```
+In project files, there is a file nammed *scenario.xsd* which describes formally a well formed XML scenario file.
+ 
  
 ## Usage
 
