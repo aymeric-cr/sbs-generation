@@ -24,7 +24,7 @@ To use the library, use the following command:
 ```shell
 $ java -jar sbs-generation-0.1-SNAPSHOT-jar-with-dependencies.jar alt-directive.xml
 ```
-The exact content of the XML file is described in the file *src/main/resources/xsd/scenario.xsd* 
+The exact content of the XML file is described in the file *src/main/resources/xsd/scenario.xsd*. 
 The various alterations and their corresponding XML file are described below.
 
 ## Features
@@ -44,10 +44,10 @@ This alteration allows users to perform *False Alarm* and *Aircraft spoofing* at
 The XML file given as input should contain, in addition to what has been mentioned above, a list of property value changes. 
 A property value change is  a triplet *p = (i,v,o)* where *i* is the property identifier (e.g., altitude or ground speed), *v* v is a value, and *o* specifies how *v* shall be employed to modify the property's initial value. 
 It can be of four modes: 
-- REPLACE: *v* replaces the property's initial value
-- OFFSET: *v* is added to the property's initial value
-- NOISE: a random value ranging 0 -- *v* is added the property's initial value
-- DRIFT: *v* plus the sum of the previous drift is added to $v$. **This mode does not work when several aircraft are targeted at once**
+- **simple**: *v* replaces the property's initial value
+- **offset**: *v* is added to the property's initial value
+- **noise**: a random value ranging 0 -- *v* is added the property's initial value
+- **drift**: *v* plus the sum of the previous drift is added to *v*.
 
 For instance:
 ```XML
@@ -61,11 +61,11 @@ For instance:
     </scope>
     <parameters>
       <target identifier="hexIdent">37AC45</target>
-      <parameter type="SIMPLE">
+      <parameter type="simple">
         <key>hexIdent</key>
         <value>RANDOM</value>
       </parameter>
-    <parameter type="SIMPLE">
+      <parameter type="simple">
         <key>squawk</key>
         <value>7700</value>
       </parameter>
@@ -91,7 +91,7 @@ For instance:
     </scope>
     <parameters>
       <target identifier="hexIdent">37AC45</target>
-      <parameter type="DRIFT">
+      <parameter type="drift">
         <key>hexIdent</key>
         <value>RANDOM</value>
         <number>15</number>
@@ -166,7 +166,7 @@ For instance:
       </waypoint>
     </waypoints>
     <parameters>
-      <parameter>
+      <parameter type="simple">
         <key>hexIdent</key>
         <value>RANDOM</value>
       </parameter>
@@ -181,7 +181,7 @@ For instance:
 
 ### Ghost Aircraft Flooding
 
-The initial definition of this attack consists of suddenly creating a lot of ghost aircraft, thus supposedly saturating the Recognized Aircraft Picture (RAP -- i.e. what the controller sees). %This attack can easily be achieved by creating a script that would call the Ghost Aircraft Creation algorithm a certain number of time with varying parameters. Instead, we propose a slightly  
+The initial definition of this attack consists of suddenly creating a lot of ghost aircraft, thus supposedly saturating the Recognized Aircraft Picture (RAP -- i.e. what the controller sees). This attack can easily be achieved by creating a script that would call the Ghost Aircraft Creation algorithm a certain number of time with varying parameters. Instead, we propose a slightly  
 However, this has proven to be quite straightforward for detection systems to recover from this type denial of service. 
 The definition of the attack is instead slightly modified to become **virtual trajectory modification flooding**. 
 The goal is to suddenly generate many different trajectories for a targeted aircraft, as if the aircraft was being split in multiple pieces, thus saturating the detection systems with many conflicting messages.
@@ -192,31 +192,17 @@ The XML file should contain the number of fake trajectories to create. For insta
 <scenario>
   <record>..\relativepath\to\recording.sbs</record>
   <firstDate>1481274814831</firstDate>
-  <action alterationType="TRAJECTORY">
+  <action alterationType="SATURATION">
     <scope type="timeWindow">
       <lowerBound>282285</lowerBound>
       <upperBound>732405</upperBound>
     </scope>
-    <waypoints>
-      <waypoint>
-        <lat></lat>
-        <lon></lon>
-        <alt></alt>
-        <ts></ts>
-      </waypoint>
-      <waypoint>
-        <lat></lat>
-        <lon></lon>
-        <alt></alt>
-        <ts></ts>
-      </waypoint>
-    </waypoints>
     <parameters>
       <target identifier="hexIdent">37AC45</target>
-      <parameter>
+      <parameter type="simple">
         <key>hexIdent</key>
         <value>RANDOM</value>
-        <number>15</number>
+        <number>20</number>
       </parameter>
     </parameters>
   </action>
@@ -231,31 +217,17 @@ It takes two recordings, one from which extract a flight track, and another into
 <scenario>
   <record>..\relativepath\to\recording.sbs</record>
   <firstDate>1481274814831</firstDate>
-  <action alterationType="TRAJECTORY">
+  <action alterationType="REPLAY">
     <scope type="timeWindow">
       <lowerBound>282285</lowerBound>
       <upperBound>732405</upperBound>
     </scope>
-    <waypoints>
-      <waypoint>
-        <lat></lat>
-        <lon></lon>
-        <alt></alt>
-        <ts></ts>
-      </waypoint>
-      <waypoint>
-        <lat></lat>
-        <lon></lon>
-        <alt></alt>
-        <ts></ts>
-      </waypoint>
-    </waypoints>
     <parameters>
       <target identifier="hexIdent">37AC45</target>
-      <parameter>
+      <recordPath>path/to/sourceRecording.sbs</recordPath>
+      <parameter type="simple">
         <key>hexIdent</key>
         <value>RANDOM</value>
-        <number>15</number>
       </parameter>
     </parameters>
   </action>
