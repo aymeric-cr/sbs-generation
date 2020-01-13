@@ -1,22 +1,14 @@
 package fr.femtost.sbs.alteration.core.incident;
 
-import java.util.Collection;
-
-import static com.google.common.collect.Lists.newArrayList;
-
 public class Incident {
 
-    private Sensors sensors;
+    private Scenario scenario;
 
-    public Collection<Sensor> getSensors() {
-        if (sensors != null) {
-            return sensors.getSensorList();
-        } else {
-            return newArrayList();
-        }
+    public Scenario getScenario() {
+        return scenario;
     }
 
-    public void setSensors(final Sensors sensors) {
-        this.sensors = sensors;
+    public void setScenario(final Scenario scenario) {
+        this.scenario = scenario;
     }
 }

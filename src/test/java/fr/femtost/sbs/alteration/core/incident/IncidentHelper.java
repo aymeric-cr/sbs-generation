@@ -1,7 +1,5 @@
 package fr.femtost.sbs.alteration.core.incident;
 
-import testools.predicate.CollectionPredicate;
-
 import java.io.File;
 import java.util.function.Predicate;
 
@@ -189,7 +187,7 @@ public class IncidentHelper {
 
     public static Predicate<Incident> anIncident(final Predicate<Incident> predicate) {
         return incident -> {
-            if (incident.getSensors() != null) {
+            if (incident.getScenario() != null) {
                 return predicate.test(incident);
             }
             System.err.println("No <Sensors> element");
@@ -197,53 +195,35 @@ public class IncidentHelper {
         };
     }
 
-    @SafeVarargs
-    public static Predicate<Incident> withSensors(final Predicate<Sensor>... sensors) {
-        return incident -> {
-            if (sensors.length != incident.getSensors().size()) {
-                System.err.println("Number of sensors - Expected: " + sensors.length +
-                        ". Got: " + incident.getSensors().size());
-                return false;
-            }
-            return containsOnly(sensors).test(incident.getSensors());
-        };
+    public static Predicate<Incident> withScenario(final Predicate<Scenario> scenario) {
+        return incident -> scenario.test(incident.getScenario());
     }
 
-    public static Predicate<Sensor> aSensor(final String sensorType,
-                                            final String sID,
-                                            final String record,
-                                            final String filter,
-                                            final Predicate<Sensor> predicate) {
-        return sensor -> {
-            if (sensor.getSensorType().compareTo(sensorType) != 0) {
-                System.err.println("Sensor type - Expected: " + sensorType + ". Got: " + sensor.getSensorType());
+    public static Predicate<Scenario> aScenario(final String record,
+                                                final String filter,
+                                                final Predicate<Scenario> predicate) {
+        return scenario -> {
+            if (scenario.getRecord().compareTo(record) != 0) {
+                System.err.println("Record path - Expected: " + record + ". Got: " + scenario.getRecord());
                 return false;
             }
-            if (sensor.getsID().compareTo(sID) != 0) {
-                System.err.println("Sensor ID - Expected: " + sID + ". Got: " + sensor.getsID());
+            if (scenario.getFilter().compareTo(filter) != 0) {
+                System.err.println("Filter - Expected: " + filter + ". Got: " + scenario.getFilter());
                 return false;
             }
-            if (sensor.getRecord().compareTo(record) != 0) {
-                System.err.println("Record path - Expected: " + record + ". Got: " + sensor.getRecord());
-                return false;
-            }
-            if (sensor.getFilter().compareTo(filter) != 0) {
-                System.err.println("Filter - Expected: " + filter + ". Got: " + sensor.getFilter());
-                return false;
-            }
-            return predicate.test(sensor);
+            return predicate.test(scenario);
         };
     }
 
     @SafeVarargs
-    public static Predicate<Sensor> withActions(final Predicate<Action>... actions) {
-        return sensor -> {
-            if (actions.length != sensor.getActions().size()) {
+    public static Predicate<Scenario> withActions(final Predicate<Action>... actions) {
+        return scenario -> {
+            if (actions.length != scenario.getActions().size()) {
                 System.err.println("Number of actions - Expected: " + actions.length +
-                        ". Got: " + sensor.getActions().size());
+                        ". Got: " + scenario.getActions().size());
                 return false;
             }
-            return containsOnly(actions).test(sensor.getActions());
+            return containsOnly(actions).test(scenario.getActions());
         };
     }
 

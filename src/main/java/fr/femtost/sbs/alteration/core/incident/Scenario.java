@@ -7,12 +7,7 @@ import java.util.Collection;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class Sensor {
-
-    @JacksonXmlProperty(isAttribute = true)
-    private String sensorType;
-
-    private String sID;
+public class Scenario {
 
     private String record;
 
@@ -23,22 +18,6 @@ public class Sensor {
     @JacksonXmlProperty(localName = "action")
     @JacksonXmlElementWrapper(useWrapping = false)
     private Collection<Action> actions = newArrayList();
-
-    public String getSensorType() {
-        return sensorType;
-    }
-
-    public void setSensorType(final String sensorType) {
-        this.sensorType = sensorType;
-    }
-
-    public String getsID() {
-        return sID;
-    }
-
-    public void setsID(final String sID) {
-        this.sID = sID;
-    }
 
     public String getRecord() {
         return record;

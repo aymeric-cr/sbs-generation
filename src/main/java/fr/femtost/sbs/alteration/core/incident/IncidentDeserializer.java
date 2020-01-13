@@ -15,9 +15,9 @@ public class IncidentDeserializer {
         this.incidentFile = incidentFile;
     }
 
-    public Incident deserialize() throws IOException {
+    public Scenario deserialize() throws IOException {
         final XmlMapper mapper = new XmlMapper();
         final String content = StreamUtils.inputStreamToString(new FileInputStream(incidentFile));
-        return mapper.readValue(content, Incident.class);
+        return mapper.readValue(content, Scenario.class);
     }
 }
