@@ -74,6 +74,20 @@ For instance:
 </scenario>
 ```
 
+**Scenario description**
+Recording to alter:
+The previous file formalize an property modification on the recording *recording.sbs* starting at the timestamp 1481274814831ms (12/9/2016 - 9:13:34.831). 
+
+Time window:
+The alteration start 282285ms after the beginning of the recording, at the timestamp 1481274814831 + 282285 = 1481275097116 (12/9/2016 - 9:18:17.116) until the timestamp 1481274814831 + 732405 = 1481275547236ms (12/9/2016 à 9:25:47).
+
+Target:
+The only targeted aircraft is the aircraft with an ICAO equals to *37AC45*.
+
+Parameters:
+There are two parameters, the first one specify that the ICAO of the targeted aicraft must be changed to a random one.
+The second parameter specify that the squawk of the targeted aircraft must be changed to 7700 (emergency status).
+
 ### Aircraft Disappearance
 
 The objective of this alteration is to hide aircraft i.e. delete messages of certain aircraft at a certain time. 
