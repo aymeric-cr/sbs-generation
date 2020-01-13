@@ -8,21 +8,22 @@ import java.util.function.Predicate;
 import static fr.femtost.sbs.alteration.core.incident.Action.*;
 import static fr.femtost.sbs.alteration.core.incident.Parameter.CHARAC_ICAO;
 import static java.util.Arrays.asList;
+import static testools.predicate.CollectionPredicate.containsOnly;
 import static testools.predicate.PredicateUtils.and;
 
 public class IncidentHelper {
 
     public static Parameter parameter(final String characteristic,
                                       final String value) {
-        return parameter(characteristic, value, false, 0);
+        return parameter(characteristic, value, "simple", 0);
     }
 
     public static Parameter parameter(final String characteristic,
                                       final String value,
-                                      final boolean offset) {
+                                      final String mode) {
         final Parameter parameter = new Parameter();
         parameter.setCharacteristic(characteristic);
-        parameter.setOffset(offset);
+        parameter.setMode(mode);
         parameter.setNumber(0);
         parameter.setValue(value);
         return parameter;
@@ -30,19 +31,23 @@ public class IncidentHelper {
 
     public static Parameter saturationParameter(final String icao,
                                                 final int number) {
-        return parameter(CHARAC_ICAO, icao, false, number);
+        return parameter(CHARAC_ICAO, icao, "simple", number);
     }
 
     public static Parameter parameter(final String characteristic,
                                       final String value,
-                                      final boolean offset,
+                                      final String mode,
                                       final int number) {
         final Parameter parameter = new Parameter();
         parameter.setCharacteristic(characteristic);
-        parameter.setOffset(offset);
+        parameter.setMode(mode);
         parameter.setNumber(number);
         parameter.setValue(value);
         return parameter;
+    }
+
+    public static Target beastTarget(final String targets) {
+        return target("icao", targets);
     }
 
     public static Target bstTarget(final String targets) {
@@ -200,7 +205,7 @@ public class IncidentHelper {
                         ". Got: " + incident.getSensors().size());
                 return false;
             }
-            return CollectionPredicate.containsOnly(sensors).test(incident.getSensors());
+            return containsOnly(sensors).test(incident.getSensors());
         };
     }
 
@@ -238,7 +243,7 @@ public class IncidentHelper {
                         ". Got: " + sensor.getActions().size());
                 return false;
             }
-            return CollectionPredicate.containsOnly(actions).test(sensor.getActions());
+            return containsOnly(actions).test(sensor.getActions());
         };
     }
 
@@ -379,7 +384,7 @@ public class IncidentHelper {
                         ". Got: " + polygon.getVertices().size());
                 return false;
             }
-            return CollectionPredicate.containsOnly(vertex).test(polygon.getVertices());
+            return containsOnly(vertex).test(polygon.getVertices());
         };
     }
 
@@ -402,7 +407,7 @@ public class IncidentHelper {
     public static Predicate<Parameters> withParameters(final Predicate<Target> target,
                                                        final Predicate<Parameter>... parameters) {
         return parameters1 ->
-                target.test(parameters1.getTarget()) && CollectionPredicate.containsOnly(parameters).test(parameters1.getParameterList());
+                target.test(parameters1.getTarget()) && containsOnly(parameters).test(parameters1.getParameterList());
     }
 
     public static Predicate<Parameters> withTrajectoryParameters(final Predicate<Target> target,
@@ -426,12 +431,12 @@ public class IncidentHelper {
                 });
     }
 
-    public static Predicate<Parameter> aParameter(final boolean offset,
+    public static Predicate<Parameter> aParameter(final String mode,
                                                   final String key,
                                                   final String value) {
         return parameter -> {
-            if (parameter.isOffset() != offset) {
-                System.err.println("Parameter offset - Expected: " + offset + ". Got: " + parameter.isOffset());
+            if (parameter.getMode().compareToIgnoreCase(mode) != 0) {
+                System.err.println("Parameter mode - Expected: " + mode + ". Got: " + parameter.getMode());
                 return false;
             }
             if (parameter.getCharacteristic().compareTo(key) != 0) {
@@ -446,12 +451,12 @@ public class IncidentHelper {
         };
     }
 
-    public static Predicate<Parameter> aParameter(final boolean offset,
+    public static Predicate<Parameter> aParameter(final String mode,
                                                   final String key,
                                                   final String value,
                                                   final int number) {
         return and(
-                aParameter(offset, key, value),
+                aParameter(mode, key, value),
                 parameter -> {
                     if (parameter.getNumber() != number) {
                         System.err.println("Parameter 'number' - Expected: " + number + ". Got: " + parameter.getNumber());
@@ -463,7 +468,7 @@ public class IncidentHelper {
 
     @SafeVarargs
     public static Predicate<Trajectory> aTrajectory(final Predicate<WayPoint>... wayPoints) {
-        return trajectory -> CollectionPredicate.containsOnly(wayPoints).test(trajectory.getWayPoints());
+        return trajectory -> containsOnly(wayPoints).test(trajectory.getWayPoints());
     }
 
     public static Predicate<WayPoint> withWayPoint(final double latitude,

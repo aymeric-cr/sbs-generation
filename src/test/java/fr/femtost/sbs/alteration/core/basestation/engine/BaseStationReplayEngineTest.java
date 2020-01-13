@@ -11,8 +11,7 @@ import java.util.stream.Collectors;
 import static com.google.common.io.Files.write;
 import static fr.femtost.sbs.alteration.core.basestation.BaseStationParser.strDateToTimestamp;
 import static fr.femtost.sbs.alteration.core.incident.IncidentHelper.*;
-import static fr.femtost.sbs.alteration.core.incident.Parameter.CHARAC_LATITUDE;
-import static fr.femtost.sbs.alteration.core.incident.Parameter.CHARAC_LONGITUDE;
+import static fr.femtost.sbs.alteration.core.incident.Parameter.*;
 import static java.io.File.createTempFile;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Arrays.stream;
@@ -147,8 +146,8 @@ public class BaseStationReplayEngineTest {
                         parameters(
                                 bstTarget("406E66"),
                                 sourceRecording.getPath(),
-                                parameter(CHARAC_LATITUDE, "0.6", true),
-                                parameter(CHARAC_LONGITUDE, "-1", true)))), UTF_8);
+                                parameter(CHARAC_LATITUDE, "0.6", MODE_OFFSET),
+                                parameter(CHARAC_LONGITUDE, "-1", MODE_OFFSET)))), UTF_8);
         Pattern p = Pattern.compile("^MSG,0,30,2303,406E66,3838.*$");
         List<String> allReplayedMsg =
                 stream(resultRecording.split("\\r?\\n")).filter(s -> p.matcher(s).matches()).collect(Collectors.toList());

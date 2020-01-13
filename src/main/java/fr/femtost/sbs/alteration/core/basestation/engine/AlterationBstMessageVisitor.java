@@ -13,9 +13,16 @@ import static java.lang.Integer.parseInt;
 public class AlterationBstMessageVisitor implements ParameterVisitor {
 
     private final Parameter parameter;
+    private final int step;
+
+    public AlterationBstMessageVisitor(final Parameter parameter, final int step) {
+        this.parameter = parameter;
+        this.step = step;
+    }
 
     public AlterationBstMessageVisitor(final Parameter parameter) {
         this.parameter = parameter;
+        this.step = 1;
     }
 
     private static boolean isParameterCharacteristic(final Parameter parameter, final String characteristic) {
@@ -24,91 +31,91 @@ public class AlterationBstMessageVisitor implements ParameterVisitor {
 
 
     @Override
-    public void visitIcaoParameter(Message message) {
-        if (isParameterCharacteristic(parameter, CHARAC_ICAO)) {
+    public void visitIcaoParameter(final Message message) {
+        if (isParameterCharacteristic(parameter, CHARAC_HEX_IDENT)) {
             alterIcao(message, parameter.getValue());
         }
     }
 
     @Override
-    public void visitCallsignParameter(CallsignParameter message) {
+    public void visitCallsignParameter(final CallsignParameter message) {
         if (isParameterCharacteristic(parameter, CHARAC_CALLSIGN)) {
             alterCallsign(message, parameter.getValue());
         }
     }
 
     @Override
-    public void visitAltitudeParameter(AltitudeParameter message) {
+    public void visitAltitudeParameter(final AltitudeParameter message) {
         if (isParameterCharacteristic(parameter, CHARAC_ALTITUDE)) {
-            alterAltitude(message, parseInt(parameter.getValue()), parameter.isOffset());
+            alterAltitude(message, parseInt(parameter.getValue()), parameter.getMode(), step);
         }
     }
 
     @Override
-    public void visitGroundSpeedParameter(GroundSpeedParameter message) {
+    public void visitGroundSpeedParameter(final GroundSpeedParameter message) {
         if (isParameterCharacteristic(parameter, CHARAC_GROUNDSPEED)) {
-            alterGroundSpeed(message, parseDouble(parameter.getValue()), parameter.isOffset());
+            alterGroundSpeed(message, parseDouble(parameter.getValue()), parameter.getMode(), step);
         }
     }
 
     @Override
-    public void visitTrackParameter(TrackParameter message) {
+    public void visitTrackParameter(final TrackParameter message) {
         if (isParameterCharacteristic(parameter, CHARAC_TRACK)) {
-            alterTrack(message, parseDouble(parameter.getValue()), parameter.isOffset());
+            alterTrack(message, parseDouble(parameter.getValue()), parameter.getMode(), step);
         }
     }
 
     @Override
-    public void visitLatitudeParameter(LatitudeParameter message) {
+    public void visitLatitudeParameter(final LatitudeParameter message) {
         if (isParameterCharacteristic(parameter, CHARAC_LATITUDE)) {
-            alterLatitude(message, parseDouble(parameter.getValue()), parameter.isOffset());
+            alterLatitude(message, parseDouble(parameter.getValue()), parameter.getMode(), step);
         }
     }
 
     @Override
-    public void visitLongitudeParameter(LongitudeParameter message) {
+    public void visitLongitudeParameter(final LongitudeParameter message) {
         if (isParameterCharacteristic(parameter, CHARAC_LONGITUDE)) {
-            alterLongitude(message, parseDouble(parameter.getValue()), parameter.isOffset());
+            alterLongitude(message, parseDouble(parameter.getValue()), parameter.getMode(), step);
         }
     }
 
     @Override
-    public void visitVerticalRateParameter(VerticalRateParameter message) {
+    public void visitVerticalRateParameter(final VerticalRateParameter message) {
         if (isParameterCharacteristic(parameter, CHARAC_VERTICALRATE)) {
-            alterVerticalRate(message, parseInt(parameter.getValue()), parameter.isOffset());
+            alterVerticalRate(message, parseInt(parameter.getValue()), parameter.getMode(), step);
         }
     }
 
     @Override
-    public void visitSquawkParameter(SquawkParameter message) {
+    public void visitSquawkParameter(final SquawkParameter message) {
         if (isParameterCharacteristic(parameter, CHARAC_SQUAWK)) {
-            alterSquawk(message, parseInt(parameter.getValue()), parameter.isOffset());
+            alterSquawk(message, parseInt(parameter.getValue()));
         }
     }
 
     @Override
-    public void visitAlertParameter(AlertParameter message) {
+    public void visitAlertParameter(final AlertParameter message) {
         if (isParameterCharacteristic(parameter, CHARAC_ALERT)) {
             alterAlert(message, parseBoolean(parameter.getValue()));
         }
     }
 
     @Override
-    public void visitEmergencyParameter(EmergencyParameter message) {
+    public void visitEmergencyParameter(final EmergencyParameter message) {
         if (isParameterCharacteristic(parameter, CHARAC_EMERGENCY)) {
             alterEmergency(message, parseBoolean(parameter.getValue()));
         }
     }
 
     @Override
-    public void visitSpiParameter(SpiParameter message) {
+    public void visitSpiParameter(final SpiParameter message) {
         if (isParameterCharacteristic(parameter, CHARAC_SPI)) {
             alterSpi(message, parseBoolean(parameter.getValue()));
         }
     }
 
     @Override
-    public void visitOnGroundParameter(OnGroundParameter message) {
+    public void visitOnGroundParameter(final OnGroundParameter message) {
         if (isParameterCharacteristic(parameter, CHARAC_ISONGROUND)) {
             alterOnGround(message, parseBoolean(parameter.getValue()));
         }

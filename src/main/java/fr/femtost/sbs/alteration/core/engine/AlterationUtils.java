@@ -141,4 +141,34 @@ public class AlterationUtils {
         // Distance in Metres
         return EARTH_RADIUS_METER * theta;
     }
+
+    public static double computeNewValue(final double actualValue, double newValue, String mode) {
+        return computeNewValue(actualValue, newValue, mode, 1);
+    }
+
+    public static double computeNewValue(final double actualValue, double newValue, String mode, int step) {
+        return new Parameter.ModeSwitch<Double>() {
+
+            @Override
+            public Double visitNoise() {
+                double randomValue = newValue * RANDOM.nextDouble();
+                return actualValue * randomValue;
+            }
+
+            @Override
+            public Double visitDrift() {
+                return actualValue + newValue * step;
+            }
+
+            @Override
+            public Double visitOffset() {
+                return newValue + actualValue;
+            }
+
+            @Override
+            public Double visitSimple() {
+                return newValue;
+            }
+        }.doSwitch(mode);
+    }
 }

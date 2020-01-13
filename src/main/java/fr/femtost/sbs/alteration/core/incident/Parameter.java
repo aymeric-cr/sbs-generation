@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 public class Parameter {
 
     public static final String CHARAC_ICAO = "icao";
+    public static final String CHARAC_HEX_IDENT = "hexIdent";
     public static final String CHARAC_CALLSIGN = "callsign";
     public static final String CHARAC_SQUAWK = "squawk";
     public static final String CHARAC_ALTITUDE = "altitude";
@@ -18,9 +19,13 @@ public class Parameter {
     public static final String CHARAC_EMERGENCY = "emergency";
     public static final String CHARAC_SPI = "SPI";
     public static final String CHARAC_ISONGROUND = "isOnGround";
+    public static final String MODE_DRIFT = "drift";
+    public static final String MODE_NOISE = "noise";
+    public static final String MODE_OFFSET = "offset";
+    public static final String MODE_SIMPLE = "simple";
 
     @JacksonXmlProperty(isAttribute = true)
-    private boolean offset;
+    private String mode;
 
     @JacksonXmlProperty(localName = "key")
     private String characteristic;
@@ -29,12 +34,12 @@ public class Parameter {
 
     private int number = 0;
 
-    public boolean isOffset() {
-        return offset;
+    public String getMode() {
+        return mode;
     }
 
-    public void setOffset(final boolean offset) {
-        this.offset = offset;
+    public void setMode(final String mode) {
+        this.mode = mode;
     }
 
     public String getCharacteristic() {
@@ -59,6 +64,30 @@ public class Parameter {
 
     public void setNumber(final int number) {
         this.number = number;
+    }
+
+    public interface ModeSwitch<T> {
+
+        T visitNoise();
+
+        T visitDrift();
+
+        T visitOffset();
+
+        T visitSimple();
+
+        default T doSwitch(final String mode) {
+            if (mode.compareToIgnoreCase(MODE_DRIFT) == 0) {
+                return visitDrift();
+            }
+            if (mode.compareToIgnoreCase(MODE_NOISE) == 0) {
+                return visitNoise();
+            }
+            if (mode.compareToIgnoreCase(MODE_OFFSET) == 0) {
+                return visitOffset();
+            }
+            return visitSimple();
+        }
     }
 
     public interface CharacteristicSwitch<T> {
@@ -118,43 +147,43 @@ public class Parameter {
         }
 
         default T doSwitch(final String characteristic) throws UnknownCharacteristicException {
-            if (characteristic.compareTo(CHARAC_ICAO) == 0) {
+            if (characteristic.compareToIgnoreCase(CHARAC_ICAO) == 0) {
                 return visitIcao();
             }
-            if (characteristic.compareTo(CHARAC_CALLSIGN) == 0) {
+            if (characteristic.compareToIgnoreCase(CHARAC_CALLSIGN) == 0) {
                 return visitCallSign();
             }
-            if (characteristic.compareTo(CHARAC_SQUAWK) == 0) {
+            if (characteristic.compareToIgnoreCase(CHARAC_SQUAWK) == 0) {
                 return visitSquawk();
             }
-            if (characteristic.compareTo(CHARAC_ALTITUDE) == 0) {
+            if (characteristic.compareToIgnoreCase(CHARAC_ALTITUDE) == 0) {
                 return visitAltitude();
             }
-            if (characteristic.compareTo(CHARAC_GROUNDSPEED) == 0) {
+            if (characteristic.compareToIgnoreCase(CHARAC_GROUNDSPEED) == 0) {
                 return visitGroundSpeed();
             }
-            if (characteristic.compareTo(CHARAC_TRACK) == 0) {
+            if (characteristic.compareToIgnoreCase(CHARAC_TRACK) == 0) {
                 return visitTrack();
             }
-            if (characteristic.compareTo(CHARAC_LATITUDE) == 0) {
+            if (characteristic.compareToIgnoreCase(CHARAC_LATITUDE) == 0) {
                 return visitLatitude();
             }
-            if (characteristic.compareTo(CHARAC_LONGITUDE) == 0) {
+            if (characteristic.compareToIgnoreCase(CHARAC_LONGITUDE) == 0) {
                 return visitLongitude();
             }
-            if (characteristic.compareTo(CHARAC_VERTICALRATE) == 0) {
+            if (characteristic.compareToIgnoreCase(CHARAC_VERTICALRATE) == 0) {
                 return visitVerticalRate();
             }
-            if (characteristic.compareTo(CHARAC_ALERT) == 0) {
+            if (characteristic.compareToIgnoreCase(CHARAC_ALERT) == 0) {
                 return visitAlert();
             }
-            if (characteristic.compareTo(CHARAC_EMERGENCY) == 0) {
+            if (characteristic.compareToIgnoreCase(CHARAC_EMERGENCY) == 0) {
                 return visitEmergency();
             }
-            if (characteristic.compareTo(CHARAC_SPI) == 0) {
+            if (characteristic.compareToIgnoreCase(CHARAC_SPI) == 0) {
                 return visitSpi();
             }
-            if (characteristic.compareTo(CHARAC_ISONGROUND) == 0) {
+            if (characteristic.compareToIgnoreCase(CHARAC_ISONGROUND) == 0) {
                 return visitIsOnGround();
             }
             throw new UnknownCharacteristicException(characteristic);

@@ -25,7 +25,7 @@ public class AlterationBaseStationMessageVisitorTest {
     @Test
     public void processAlteration_Message1_latitude_posOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349));
-        new AlterationBstMessageVisitor(parameter(CHARAC_LATITUDE, "1.22", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_LATITUDE, "1.22", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -37,7 +37,7 @@ public class AlterationBaseStationMessageVisitorTest {
     @Test
     public void processAlteration_Message1_latitude_negOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349));
-        new AlterationBstMessageVisitor(parameter(CHARAC_LATITUDE, "-5.7", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_LATITUDE, "-5.7", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -61,7 +61,7 @@ public class AlterationBaseStationMessageVisitorTest {
     @Test
     public void processAlteration_Message1_longitude_posOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349));
-        new AlterationBstMessageVisitor(parameter(CHARAC_LONGITUDE, "30.22", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_LONGITUDE, "30.22", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -73,7 +73,7 @@ public class AlterationBaseStationMessageVisitorTest {
     @Test
     public void processAlteration_Message1_longitude_negOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(20.25), altitude(12349));
-        new AlterationBstMessageVisitor(parameter(CHARAC_LONGITUDE, "-12.24", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_LONGITUDE, "-12.24", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -97,7 +97,7 @@ public class AlterationBaseStationMessageVisitorTest {
     @Test
     public void processAlteration_Message1_altitude_posOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349));
-        new AlterationBstMessageVisitor(parameter(CHARAC_ALTITUDE, "1023", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_ALTITUDE, "1023", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -109,7 +109,7 @@ public class AlterationBaseStationMessageVisitorTest {
     @Test
     public void processAlteration_Message1_altitude_negOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349));
-        new AlterationBstMessageVisitor(parameter(CHARAC_ALTITUDE, "-24", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_ALTITUDE, "-24", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -136,7 +136,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_groundspeed_posOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341));
-        new AlterationBstMessageVisitor(parameter(CHARAC_GROUNDSPEED, "4.99", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_GROUNDSPEED, "4.99", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -150,7 +150,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_groundspeed_negOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341));
-        new AlterationBstMessageVisitor(parameter(CHARAC_GROUNDSPEED, "-340.0", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_GROUNDSPEED, "-340.0", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -180,7 +180,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_vertrate_posOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4));
-        new AlterationBstMessageVisitor(parameter(CHARAC_VERTICALRATE, "1023", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_VERTICALRATE, "1023", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -195,7 +195,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_vertrate_negOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4));
-        new AlterationBstMessageVisitor(parameter(CHARAC_VERTICALRATE, "-2", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_VERTICALRATE, "-2", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -242,7 +242,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_alert_posOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4), alert(true));
-        new AlterationBstMessageVisitor(parameter(CHARAC_ALERT, "false", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_ALERT, "false", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -258,7 +258,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_alert_negOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4), alert(true));
-        new AlterationBstMessageVisitor(parameter(CHARAC_ALERT, "true", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_ALERT, "true", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -309,7 +309,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_emergency_posOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4), alert(true), emergency(false));
-        new AlterationBstMessageVisitor(parameter(CHARAC_EMERGENCY, "false", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_EMERGENCY, "false", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -326,7 +326,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_emergency_negOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4), alert(true), emergency(false));
-        new AlterationBstMessageVisitor(parameter(CHARAC_EMERGENCY, "true", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_EMERGENCY, "true", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -379,7 +379,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_spi_posOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4), alert(true), emergency(false), spi(true));
-        new AlterationBstMessageVisitor(parameter(CHARAC_SPI, "false", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_SPI, "false", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -397,7 +397,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_spi_negOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4), alert(true), emergency(false), spi(true));
-        new AlterationBstMessageVisitor(parameter(CHARAC_SPI, "true", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_SPI, "true", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -453,7 +453,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_onGround_posOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4), alert(true), emergency(false), spi(true), onGround(false));
-        new AlterationBstMessageVisitor(parameter(CHARAC_ISONGROUND, "true", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_ISONGROUND, "true", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -472,7 +472,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_onGround_negOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4), alert(true), emergency(false), spi(true), onGround(false));
-        new AlterationBstMessageVisitor(parameter(CHARAC_ISONGROUND, "false", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_ISONGROUND, "false", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -511,7 +511,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_track_posOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4), alert(true), emergency(false), spi(true), onGround(false), track(12.1));
-        new AlterationBstMessageVisitor(parameter(CHARAC_TRACK, "11.999999", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_TRACK, "11.999999", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -531,7 +531,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_track_negOffset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4), alert(true), emergency(false), spi(true), onGround(false), track(12.1));
-        new AlterationBstMessageVisitor(parameter(CHARAC_TRACK, "-1.00001", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_TRACK, "-1.00001", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
@@ -552,7 +552,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_icao() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4), alert(true), emergency(false), spi(true), onGround(false), track(12.1));
-        new AlterationBstMessageVisitor(parameter(CHARAC_ICAO, "25TR987")).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_HEX_IDENT, "25TR987")).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("25TR987"),
                 withDate(1555694990L),
@@ -572,7 +572,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_icao_offset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4), alert(true), emergency(false), spi(true), onGround(false), track(12.1));
-        new AlterationBstMessageVisitor(parameter(CHARAC_ICAO, "25TR987", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_HEX_IDENT, "25TR987", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("25TR987"),
                 withDate(1555694990L),
@@ -613,7 +613,7 @@ public class AlterationBaseStationMessageVisitorTest {
     public void processAlteration_Message1_callsign_offset() {
         final BaseStationMessageFull message = bstMessageFull("39AC47", 1555694990L, latitude(50.2), longitude(0.25), altitude(12349),
                 groundSpeed(341), verticalRate(4), alert(true), emergency(false), spi(true), onGround(false), track(12.1), callsign("ER34OT9"));
-        new AlterationBstMessageVisitor(parameter(CHARAC_CALLSIGN, "34A789", true)).accept(message);
+        new AlterationBstMessageVisitor(parameter(CHARAC_CALLSIGN, "34A789", MODE_OFFSET)).accept(message);
         assertThat(message, aBstMessageFull(
                 withIcao("39AC47"),
                 withDate(1555694990L),
