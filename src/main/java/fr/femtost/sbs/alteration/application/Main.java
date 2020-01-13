@@ -4,7 +4,6 @@ import fr.femtost.sbs.alteration.api.AlterationAPI;
 
 import java.io.File;
 
-// Use this class as a free script to your needs
 class Main {
 
     public static void main(final String[] args) throws Exception {
