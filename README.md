@@ -90,7 +90,7 @@ The second parameter specify that the squawk of the targeted aircraft must be ch
 ### Aircraft Disappearance
 
 The objective of this alteration is to hide aircraft i.e. delete messages of certain aircraft at a certain time. 
-Additional information required in the XML file is $n$, is the number of deleted consecutive messages e.g. if $n = 0$ then all messages are deleted, while if $n = 3$ for instance, then only three out of four messages are deleted.
+Additional information required in the XML file is *n*, is the number of deleted consecutive messages e.g. if *n = 0* then all messages are deleted, while if *n = 3* for instance, then only three out of four messages are deleted.
 
 For instance:
 ```XML
@@ -104,10 +104,13 @@ For instance:
     </scope>
     <parameters>
       <target identifier="hexIdent">37AC45</target>
+      <number>4</number>
     </parameters>
   </action>
 </scenario>
 ```
+
+This file will hide 4 out of 5 messages (number tag in the file = *n*) emitted by aircraft 37AC45 between seconds 282285 and 732405, according to the recording's duration.
 
 ### Virtual Trajectory Modification 
 
@@ -125,23 +128,29 @@ For instance:
       <lowerBound>282285</lowerBound>
       <upperBound>732405</upperBound>
     </scope>
-    <waypoints>
-      <waypoint>
-        <lat></lat>
-        <lon></lon>
-        <alt></alt>
-        <ts></ts>
-      </waypoint>
-      <waypoint>
-        <lat></lat>
-        <lon></lon>
-        <alt></alt>
-        <ts></ts>
-      </waypoint>
-    </waypoints>
+    <parameters>
+      <target identifier="hexIdent">37AC45</target>
+        <waypoints>
+          <waypoint>
+            <lat>6.123</lat>
+            <lon>45.38</lon>
+            <alt>26500</alt>
+            <ts>309000</ts>
+          </waypoint>
+          <waypoint>
+            <lat>6.5</lat>
+            <lon>45.58327</lon>
+            <alt>27750</alt>
+            <ts>550004</ts>
+          </waypoint>
+        </waypoints>
+    </parameters>
   </action>
 </scenario>
 ```
+
+This will edit messages emitted by aircraft 37AC45 (within the time-window) by replacing all the property values (position, velocity) so that the aircraft's trajectory passes through the two way-points. 
+This process does not involve message creation, meaning that if the modified trajectory is much longer than the initial one, aircraft's velocity may be set to abnormally high values in order to travel the extra distance within the same amount of time.
 
 ### Ghost Aircraft Creation
 
@@ -159,33 +168,36 @@ For instance:
       <lowerBound>282285</lowerBound>
       <upperBound>732405</upperBound>
     </scope>
-    <waypoints>
-      <waypoint>
-        <lat></lat>
-        <lon></lon>
-        <alt></alt>
-        <ts></ts>
-      </waypoint>
-      <waypoint>
-        <lat></lat>
-        <lon></lon>
-        <alt></alt>
-        <ts></ts>
-      </waypoint>
-    </waypoints>
     <parameters>
-      <parameter type="simple">
-        <key>hexIdent</key>
-        <value>RANDOM</value>
-      </parameter>
-      <parameter type="simple">
-        <key>callsign</key>
-        <value>AL89LRE</value>
-      </parameter>
+        <waypoints>
+          <waypoint>
+            <lat>6.123</lat>
+            <lon>45.38</lon>
+            <alt>26500</alt>
+            <ts>282285</ts>
+          </waypoint>
+          <waypoint>
+            <lat>6.5</lat>
+            <lon>45.58327</lon>
+            <alt>27750</alt>
+            <ts>732405</ts>
+          </waypoint>
+        </waypoints>
+        <parameter type="simple">
+            <key>hexIdent</key>
+            <value>RANDOM</value>
+        </parameter>
+        <parameter type="simple">
+            <key>callsign</key>
+            <value>AL89LRE</value>
+        </parameter>
     </parameters>
   </action>
 </scenario>
 ```
+
+This will create aircraft with random ICAO and callsign set to AL89LRE. A starting point and an ending point have been defined (both are way-points). 
+Contrary to trajectory modification, this alteration creates messages.
 
 ### Ghost Aircraft Flooding
 
@@ -218,6 +230,8 @@ For instance:
   </action>
 </scenario>
 ```
+
+This will create 20 fake trajectories for aircraft 37AC45.
 
 ### Replay
 
