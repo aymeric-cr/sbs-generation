@@ -130,20 +130,24 @@ For instance:
     </scope>
     <parameters>
       <target identifier="hexIdent">37AC45</target>
-        <waypoints>
+        <trajectory>
           <waypoint>
-            <lat>6.123</lat>
-            <lon>45.38</lon>
+            <vertex>
+              <lat>6.123</lat>
+              <lon>45.38</lon>
+            </vertex>
             <alt>26500</alt>
-            <ts>309000</ts>
+            <time>282285</time>
           </waypoint>
           <waypoint>
-            <lat>6.5</lat>
-            <lon>45.58327</lon>
+            <vertex>
+              <lat>6.5</lat>
+              <lon>45.58327</lon>
+            </vertex>
             <alt>27750</alt>
-            <ts>550004</ts>
+            <time>732405</time>
           </waypoint>
-        </waypoints>
+        </trajectory>
     </parameters>
   </action>
 </scenario>
@@ -169,20 +173,24 @@ For instance:
       <upperBound>732405</upperBound>
     </scope>
     <parameters>
-        <waypoints>
+        <trajectory>
           <waypoint>
-            <lat>6.123</lat>
-            <lon>45.38</lon>
+            <vertex>
+              <lat>6.123</lat>
+              <lon>45.38</lon>
+            </vertex>
             <alt>26500</alt>
-            <ts>282285</ts>
+            <time>282285</time>
           </waypoint>
           <waypoint>
-            <lat>6.5</lat>
-            <lon>45.58327</lon>
+            <vertex>
+              <lat>6.5</lat>
+              <lon>45.58327</lon>
+            </vertex>
             <alt>27750</alt>
-            <ts>732405</ts>
+            <time>732405</time>
           </waypoint>
-        </waypoints>
+        </trajectory>
         <parameter type="simple">
             <key>hexIdent</key>
             <value>RANDOM</value>
@@ -259,6 +267,8 @@ For instance:
   </action>
 </scenario>
 ```
+
+This will extract messages of aircraft 37AC45 from recording *sourceRecording.sbs*, and inject them into recording *recording.sbs* from second 282285 to 732405 (any subsequent message that would be outside of the specified time window is not injected).
 
 ## References
 <a id="1">[1]</a> 
