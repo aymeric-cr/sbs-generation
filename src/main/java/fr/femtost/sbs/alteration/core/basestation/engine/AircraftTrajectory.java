@@ -9,6 +9,7 @@ import java.util.SortedMap;
 
 import static com.google.common.collect.Maps.newTreeMap;
 import static fr.femtost.sbs.alteration.core.engine.AlterationUtils.*;
+import static java.lang.Math.round;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
@@ -63,7 +64,7 @@ public class AircraftTrajectory {
 
     public Optional<Double> getLatitude(final long time) {
         try {
-            return of(latitudeFunction.value(time));
+            return of(applyNoise(latitudeFunction.value(time)));
         } catch (final Exception ignored) {
             return empty();
         }
@@ -71,7 +72,7 @@ public class AircraftTrajectory {
 
     public Optional<Double> getLongitude(final long time) {
         try {
-            return of(longitudeFunction.value(time));
+            return of(applyNoise(longitudeFunction.value(time)));
         } catch (final Exception ignored) {
             return empty();
         }
@@ -79,7 +80,7 @@ public class AircraftTrajectory {
 
     public Optional<Integer> getAltitude(final long time) {
         try {
-            return of((int) altitudeFunction.value(time));
+            return of((int) (25 * round(altitudeFunction.value(time) / 25)));
         } catch (final Exception ignored) {
             return empty();
         }
@@ -145,7 +146,7 @@ public class AircraftTrajectory {
         return altitudeFunction;
     }
 
-    private double[] convertDoubles(final Collection<Double> doubles) {
+    private static double[] convertDoubles(final Collection<Double> doubles) {
         double[] result = new double[doubles.size()];
         int i = 0;
         for (final Double value : doubles) {
@@ -153,5 +154,10 @@ public class AircraftTrajectory {
             i++;
         }
         return result;
+    }
+
+    private static double applyNoise(final double value) {
+        final double ratio = (RANDOM.nextDouble() - 0.5) / 10000;
+        return value + value * ratio;
     }
 }
