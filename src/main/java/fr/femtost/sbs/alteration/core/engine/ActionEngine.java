@@ -58,8 +58,6 @@ public abstract class ActionEngine {
                 final Optional<String> alteredMessage = handleMessage(currentMessage);
                 if (alteredMessage.isPresent()) {
                     bufferedWriter.write(alteredMessage.get() + "\n");
-                } else {
-                    bufferedWriter.write(currentMessage + "\n");
                 }
                 currentMessage = bufferedReader.readLine();
             }

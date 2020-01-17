@@ -34,6 +34,8 @@ public class Parameter {
 
     private int number = 0;
 
+    private int frequency = 0;
+
     public String getMode() {
         return mode;
     }
@@ -64,6 +66,14 @@ public class Parameter {
 
     public void setNumber(final int number) {
         this.number = number;
+    }
+
+    public int getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
     }
 
     public interface ModeSwitch<T> {

@@ -13,7 +13,7 @@ public class ScenarioHelper {
 
     public static Parameter parameter(final String characteristic,
                                       final String value) {
-        return parameter(characteristic, value, "simple", 0);
+        return parameter(characteristic, value, "simple", 0, 1);
     }
 
     public static Parameter parameter(final String characteristic,
@@ -29,23 +29,25 @@ public class ScenarioHelper {
 
     public static Parameter saturationParameter(final String icao,
                                                 final int number) {
-        return parameter(CHARAC_ICAO, icao, "simple", number);
+        return parameter(CHARAC_ICAO, icao, "simple", number, 1);
+    }
+
+    public static Parameter deletionParameter(final int frequency) {
+        return parameter("", "", "simple", 0, frequency);
     }
 
     public static Parameter parameter(final String characteristic,
                                       final String value,
                                       final String mode,
-                                      final int number) {
+                                      final int number,
+                                      final int frequency) {
         final Parameter parameter = new Parameter();
         parameter.setCharacteristic(characteristic);
         parameter.setMode(mode);
         parameter.setNumber(number);
+        parameter.setFrequency(frequency);
         parameter.setValue(value);
         return parameter;
-    }
-
-    public static Target beastTarget(final String targets) {
-        return target("icao", targets);
     }
 
     public static Target bstTarget(final String targets) {
