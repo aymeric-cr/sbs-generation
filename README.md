@@ -104,13 +104,13 @@ For instance:
     </scope>
     <parameters>
       <target identifier="hexIdent">37AC45</target>
-      <number>4</number>
+      <frequency>4</frequency>
     </parameters>
   </action>
 </scenario>
 ```
 
-This file will hide 4 out of 5 messages (number tag in the file = *n*) emitted by aircraft 37AC45 between seconds 282285 and 732405, according to the recording's duration.
+This file will hide 4 out of 5 messages (frequency tag in the file = *n*) emitted by aircraft 37AC45 between seconds 282285 and 732405, according to the recording's duration.
 
 ### Virtual Trajectory Modification 
 
