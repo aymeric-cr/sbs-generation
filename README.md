@@ -61,11 +61,11 @@ For instance:
     </scope>
     <parameters>
       <target identifier="hexIdent">37AC45</target>
-      <parameter type="simple">
+      <parameter mode="simple">
         <key>hexIdent</key>
         <value>RANDOM</value>
       </parameter>
-      <parameter type="simple">
+      <parameter mode="simple">
         <key>squawk</key>
         <value>7700</value>
       </parameter>
@@ -191,11 +191,11 @@ For instance:
             <time>732405</time>
           </waypoint>
         </trajectory>
-        <parameter type="simple">
+        <parameter mode="simple">
             <key>hexIdent</key>
             <value>RANDOM</value>
         </parameter>
-        <parameter type="simple">
+        <parameter mode="simple">
             <key>callsign</key>
             <value>AL89LRE</value>
         </parameter>
@@ -229,7 +229,7 @@ For instance:
     </scope>
     <parameters>
       <target identifier="hexIdent">37AC45</target>
-      <parameter type="simple">
+      <parameter mode="simple">
         <key>hexIdent</key>
         <value>RANDOM</value>
         <number>20</number>
@@ -259,7 +259,7 @@ For instance:
     <parameters>
       <target identifier="hexIdent">37AC45</target>
       <recordPath>../relativepath/to/sourceRecording.sbs</recordPath>
-      <parameter type="simple">
+      <parameter mode="simple">
         <key>hexIdent</key>
         <value>RANDOM</value>
       </parameter>
