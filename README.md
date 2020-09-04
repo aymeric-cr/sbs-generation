@@ -27,7 +27,7 @@ $ java -jar sbs-generation-0.1-SNAPSHOT-jar-with-dependencies.jar alt-directive.
 The exact content of the XML file is described in the file *src/main/resources/xsd/scenario.xsd*. 
 The various alterations and their corresponding XML file are described below.
 
-In order to generate XML files, it is possible to use an high level dedicated Domain Specific Langage, avaible here: https://github.com/aymeric-cr/dsl-scenario
+In order to generate XML files, it is possible to use an high level dedicated Domain Specific Langage, available here: https://github.com/aymeric-cr/dsl-scenario
 
 ## Features
 
