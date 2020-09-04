@@ -1,4 +1,4 @@
-# Domain Specific Languages for False Data Injection Attack scenarios
+# Data Generation for False Data Injection Attack scenarios
 > Test Designer for False Data Injection Attack Testing in Air Traffic Surveillance
 
 This library lets you design FDIA scenarios on legitimate ADS-B recordings in the SBS format. 
